@@ -45,7 +45,6 @@ public class CameraController : MonoBehaviour
             if (neighbours.getCamD() != null)
                 MoveToCamD();
         }
-
     }
 
     //Get neighbouring cameras from new camera
