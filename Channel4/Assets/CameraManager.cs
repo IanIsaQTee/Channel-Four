@@ -9,7 +9,7 @@ public class CameraManager : MonoBehaviour
     public CameraNeighbours neighbours;
 
     bool IsMoving = false;
-    [SerializeField] private float speed = 0.3f;
+    [SerializeField] private float timeToTransition = 0.3f;
 
     // Update is called once per frame
     void Update()
@@ -58,7 +58,7 @@ public class CameraManager : MonoBehaviour
     {
         IsMoving = true;
         Camera camW = neighbours.getCamW();
-        CurrCam.transform.DOMove(camW.transform.position, speed)
+        CurrCam.transform.DOMove(camW.transform.position, timeToTransition)
             .OnComplete(()=>OnMoveFinish(camW));
     }
 
@@ -66,7 +66,7 @@ public class CameraManager : MonoBehaviour
     {
         IsMoving = true;
         Camera camA = neighbours.getCamA();
-        CurrCam.transform.DOMove(camA.transform.position, speed)
+        CurrCam.transform.DOMove(camA.transform.position, timeToTransition)
             .OnComplete(() => OnMoveFinish(camA));
     }
 
@@ -74,7 +74,7 @@ public class CameraManager : MonoBehaviour
     {
         IsMoving = true;
         Camera camS = neighbours.getCamS();
-        CurrCam.transform.DOMove(camS.transform.position, speed)
+        CurrCam.transform.DOMove(camS.transform.position, timeToTransition)
             .OnComplete(() => OnMoveFinish(camS));
     }
 
@@ -82,7 +82,7 @@ public class CameraManager : MonoBehaviour
     {
         IsMoving = true;
         Camera camD = neighbours.getCamD();
-        CurrCam.transform.DOMove(camD.transform.position, speed)
+        CurrCam.transform.DOMove(camD.transform.position, timeToTransition)
             .OnComplete(() => OnMoveFinish(camD));
     }
 }
