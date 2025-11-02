@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class CameraManager : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     public Camera CurrCam;
     public CameraNeighbours neighbours;
