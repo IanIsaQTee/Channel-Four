@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class CameraController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class CameraController : MonoBehaviour
     bool IsMoving = false;
     [SerializeField] private float timeToTransition = 0.3f;
 
+    public static event Action OnMoveButtonPressed;
     // Update is called once per frame
     void Update()
     {
@@ -19,23 +21,27 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.Space))
         {
+            OnMoveButtonPressed?.Invoke();
             if(neighbours.getCamW() != null)
                 MoveToCamW();
         }
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.A) && Input.GetKeyDown(KeyCode.Space))
         {
+            OnMoveButtonPressed?.Invoke();
             if (neighbours.getCamA() != null)
                 MoveToCamA();
         }
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.S) && Input.GetKeyDown(KeyCode.Space))
         {
+            OnMoveButtonPressed?.Invoke();
             if (neighbours.getCamS() != null)
                 MoveToCamS();
         }
-        if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.D) && Input.GetKeyDown(KeyCode.Space))
         {
+            OnMoveButtonPressed?.Invoke();
             if (neighbours.getCamD() != null)
                 MoveToCamD();
         }
