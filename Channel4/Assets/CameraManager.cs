@@ -1,0 +1,88 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using DG.Tweening;
+
+public class CameraManager : MonoBehaviour
+{
+    public Camera CurrCam;
+    public CameraNeighbours neighbours;
+
+    bool IsMoving = false;
+    [SerializeField] private float speed = 0.3f;
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(IsMoving)
+        {
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
+        {
+            if(neighbours.getCamW() != null)
+                MoveToCamW();
+        }
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
+        {
+            if (neighbours.getCamA() != null)
+                MoveToCamA();
+        }
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.LeftShift))
+        {
+            if (neighbours.getCamS() != null)
+                MoveToCamS();
+        }
+        if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift))
+        {
+            if (neighbours.getCamD() != null)
+                MoveToCamD();
+        }
+
+    }
+
+    //Get neighbouring cameras from new camera
+    void setNeighbours(Camera newCam)
+    {
+        this.neighbours = newCam.GetComponent<CameraNeighbours>();
+    }
+    //Callback to when movement is completed
+    void OnMoveFinish(Camera newCam)
+    {
+        setNeighbours(newCam);
+        IsMoving = false;
+    }
+
+    void MoveToCamW()
+    {
+        IsMoving = true;
+        Camera camW = neighbours.getCamW();
+        CurrCam.transform.DOMove(camW.transform.position, speed)
+            .OnComplete(()=>OnMoveFinish(camW));
+    }
+
+    void MoveToCamA()
+    {
+        IsMoving = true;
+        Camera camA = neighbours.getCamA();
+        CurrCam.transform.DOMove(camA.transform.position, speed)
+            .OnComplete(() => OnMoveFinish(camA));
+    }
+
+    void MoveToCamS()
+    {
+        IsMoving = true;
+        Camera camS = neighbours.getCamS();
+        CurrCam.transform.DOMove(camS.transform.position, speed)
+            .OnComplete(() => OnMoveFinish(camS));
+    }
+
+    void MoveToCamD()
+    {
+        IsMoving = true;
+        Camera camD = neighbours.getCamD();
+        CurrCam.transform.DOMove(camD.transform.position, speed)
+            .OnComplete(() => OnMoveFinish(camD));
+    }
+}
