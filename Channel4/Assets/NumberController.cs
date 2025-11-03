@@ -20,6 +20,8 @@ public class NumberController : MonoBehaviour
     string input;
 
     public static event Action<char> OnNumberPressed;
+    public static event Action OnNumberCorrect;
+    public static event Action OnNumberWrong;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +67,7 @@ public class NumberController : MonoBehaviour
                 if (answer[0] + answer[1] == input)
                 {
                     Debug.Log("CORRECT");
+                    OnNumberCorrect?.Invoke();
                     score++;
                     randomizeNumber();
                     currentTime = timeLimit;
@@ -72,6 +75,7 @@ public class NumberController : MonoBehaviour
                 }
                 else
                 {
+                    OnNumberWrong?.Invoke();
                     Debug.Log("INCORRECT");
                     hp--;
                 }

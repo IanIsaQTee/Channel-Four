@@ -11,8 +11,11 @@ public class PhoneAudioPlayer : MonoBehaviour
     {
         NumberController.OnNumberPressed += PlayTone;
     }
+    private void OnDisable()
+    {
+        NumberController.OnNumberPressed -= PlayTone;
+    }
 
-    
 
     private void PlayTone(char number)
     {
