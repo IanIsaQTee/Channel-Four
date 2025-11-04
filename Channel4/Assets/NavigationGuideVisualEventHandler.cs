@@ -21,7 +21,7 @@ public class NavigationGuideVisualEventHandler : MonoBehaviour
 
     private void Start()
     {
-        W.SetActive(false);
+        //W.SetActive(false);
         A.SetActive(false);
         S.SetActive(false);
         D.SetActive(false);
