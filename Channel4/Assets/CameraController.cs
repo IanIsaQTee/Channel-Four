@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float timeToTransition = 0.3f;
 
     public static event Action OnMoveButtonPressed;
+    public static event Action<CameraNeighbours> OnCameraChange;
     // Update is called once per frame
     void Update()
     {
@@ -57,6 +58,7 @@ public class CameraController : MonoBehaviour
     {
         setNeighbours(newCam);
         IsMoving = false;
+        OnCameraChange?.Invoke(this.neighbours);
     }
 
     void MoveToCamW()
